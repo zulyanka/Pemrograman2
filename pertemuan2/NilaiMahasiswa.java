@@ -1,3 +1,6 @@
+// NAMA :   ZULYAN WIDYAKA KRISNA
+// NIM  :   231011403446
+
 import java.util.*;
 
 public class NilaiMahasiswa {

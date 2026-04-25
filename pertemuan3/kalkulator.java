@@ -5,7 +5,7 @@ public class kalkulator {
 
     public static void main(String[] args) {
         // Membuat window
-        JFrame frame = new JFrame("Muhamad Fahrizal");
+        JFrame frame = new JFrame("Zulyan Widyaka K");
 
         // Membuat label
         JLabel label1 = new JLabel("Angka Pertama:");
