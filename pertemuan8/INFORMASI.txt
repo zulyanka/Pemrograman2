@@ -1,0 +1,5 @@
+1. Buat file Manifest :
+echo Main-Class: FormCetak > manifest.txt
+
+2. Compile Ulang 
+javac -cp "lib/*" *.java
