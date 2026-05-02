@@ -1,0 +1,4 @@
+DOWNLOAD LIBS   : https://repo1.maven.org/maven2
+
+COMPILE LIB     : javac -cp ".;lib\*" FormCetak.java
+JALANKAN FORM   : java -cp ".;lib\*" FormCetak

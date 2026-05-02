@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportGaji" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <queryString>
+        <![CDATA[SELECT g.id_gaji, k.ktp, k.nama, p.nama_pekerjaan FROM tbgaji g JOIN tbkaryawan k ON g.ktp = k.ktp JOIN tbpekerjaan p ON g.kode_pekerjaan = p.kode_pekerjaan]]>
+    </queryString>
+    <field name="id_gaji" class="java.lang.Integer"/>
+    <field name="ktp" class="java.lang.String"/>
+    <field name="nama" class="java.lang.String"/>
+    <field name="nama_pekerjaan" class="java.lang.String"/>
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Laporan Transaksi Gaji Karyawan]]></text>
+            </staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="25">
+            <staticText>
+                <reportElement x="0" y="0" width="60" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[ID Trans]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="60" y="0" width="140" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[KTP Karyawan]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="200" y="0" width="180" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Nama Karyawan]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="380" y="0" width="175" height="20"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Posisi / Pekerjaan]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="20" width="555" height="1"/>
+            </line>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="25">
+            <textField>
+                <reportElement x="0" y="0" width="60" height="20"/>
+                <textFieldExpression><![CDATA[$F{id_gaji}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="0" width="140" height="20"/>
+                <textFieldExpression><![CDATA[$F{ktp}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="180" height="20"/>
+                <textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="380" y="0" width="175" height="20"/>
+                <textFieldExpression><![CDATA[$F{nama_pekerjaan}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>
