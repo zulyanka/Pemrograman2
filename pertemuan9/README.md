@@ -1,8 +1,8 @@
 # 🏪 POS App - Sistem Penjualan Sederhana
 **Java Swing + MySQL | MVC Pattern**
 ```
-NAMA    : I GEDE YOGA SETIAWAN
-NIM     : 231011401028
+NAMA    : ZULYAN WIDYAKA KRISNA
+NIM     : 231011403446
 KELAS   : 06TPLE016
 ```
 ---
