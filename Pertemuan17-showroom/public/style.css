@@ -1,0 +1,227 @@
+/* =========================================================
+   STYLE.CSS — Showroom Master
+   Tema: "midnight garage" — sidebar gelap kebiruan,
+   konten terang, aksen amber seperti lampu sein.
+   ========================================================= */
+
+/* Variabel warna: ganti di sini, seluruh aplikasi ikut berubah */
+:root {
+  --gelap: #101826;        /* sidebar */
+  --gelap-2: #1b2638;      /* tombol aktif di sidebar */
+  --latar: #f3f5f8;        /* background konten */
+  --kartu: #ffffff;        /* panel & kartu */
+  --garis: #e1e6ee;        /* border halus */
+  --teks: #1c2433;         /* teks utama */
+  --teks-redup: #6b7689;   /* teks sekunder */
+  --aksen: #f5a623;        /* amber — tombol & angka penting */
+  --aksen-gelap: #d68f12;
+  --merah: #d9534f;        /* tombol hapus */
+}
+
+/* Reset dasar */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--latar);
+  color: var(--teks);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  background: var(--gelap);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  padding: 24px 16px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+
+.brand-logo {
+  background: var(--aksen);
+  color: var(--gelap);
+  font-weight: 800;
+  border-radius: 10px;
+  width: 42px; height: 42px;
+  display: grid;
+  place-items: center;
+  letter-spacing: 1px;
+}
+
+.brand h1 { font-size: 16px; }
+.brand p  { font-size: 11px; color: #9aa7bd; }
+
+nav { display: flex; flex-direction: column; gap: 6px; }
+
+.nav-btn {
+  text-align: left;
+  background: none;
+  border: none;
+  color: #c4cddd;
+  font-size: 14px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-btn:hover { background: var(--gelap-2); color: #fff; }
+
+.nav-btn.active {
+  background: var(--gelap-2);
+  color: var(--aksen);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--aksen); /* garis amber di kiri menu aktif */
+}
+
+.sidebar-foot { margin-top: auto; font-size: 12px; color: #9aa7bd; line-height: 1.7; }
+.sidebar-foot strong { color: var(--aksen); }
+.foot-copy { font-size: 10px; color: #5b6778; }
+
+/* ===== KONTEN ===== */
+.content {
+  margin-left: 240px;   /* memberi ruang untuk sidebar */
+  flex: 1;
+  padding: 32px 36px;
+}
+
+/* Setiap "halaman" disembunyikan, hanya yang .active yang tampil */
+.page { display: none; }
+.page.active { display: block; }
+
+.page-head { margin-bottom: 24px; }
+.page-head h2 { font-size: 26px; }
+.page-head p  { color: var(--teks-redup); margin-top: 4px; }
+
+/* ===== KARTU STATISTIK DASHBOARD ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card.highlight { background: var(--gelap); border-color: var(--gelap); color: #fff; }
+.stat-card.highlight .stat-value { color: var(--aksen); }
+.stat-card.highlight .stat-note  { color: #9aa7bd; }
+
+.stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--teks-redup); }
+.stat-card.highlight .stat-label { color: #9aa7bd; }
+.stat-value { font-size: 28px; font-weight: 700; }
+.stat-note  { font-size: 12px; color: var(--teks-redup); }
+
+/* ===== PANEL (kotak putih berisi form / tabel) ===== */
+.panel {
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.panel h3 { font-size: 16px; margin-bottom: 16px; }
+
+/* ===== FORM ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-wide { grid-column: 1 / -1; }          /* lebar penuh */
+.field-btn  { justify-content: flex-end; }
+
+label { font-size: 13px; font-weight: 600; }
+
+input, select {
+  padding: 10px 12px;
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fbfcfe;
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--aksen);
+  outline-offset: 1px;
+  border-color: var(--aksen);
+}
+
+.btn-primary {
+  background: var(--aksen);
+  color: var(--gelap);
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary:hover { background: var(--aksen-gelap); }
+
+.btn-hapus {
+  background: none;
+  border: 1px solid var(--merah);
+  color: var(--merah);
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-hapus:hover { background: var(--merah); color: #fff; }
+
+/* ===== TABEL ===== */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--teks-redup);
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--garis);
+}
+
+td { padding: 11px 12px; border-bottom: 1px solid var(--garis); }
+
+tbody tr:hover { background: #f8fafc; }
+
+.empty { text-align: center; color: var(--teks-redup); padding: 24px !important; }
+
+/* Badge status mobil terjual */
+.badge-terjual {
+  background: #fdecea;
+  color: var(--merah);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+/* ===== RESPONSIVE (layar kecil / HP) ===== */
+@media (max-width: 720px) {
+  .sidebar { position: static; width: 100%; height: auto; }
+  body { flex-direction: column; }
+  .content { margin-left: 0; padding: 20px; }
+  nav { flex-direction: row; flex-wrap: wrap; }
+}

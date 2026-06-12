@@ -1,0 +1,356 @@
+/* =========================================================
+   STYLE.CSS — ZW Rent Car
+   Tema: "NIGHT DRIVE" 🌃
+   Inspirasi: jalan raya di malam hari — latar gelap seperti
+   aspal, aksen kuning seperti marka jalan, garis putus-putus
+   seperti garis tengah jalan, dan logo berbentuk plat nomor.
+   Laporan dibuat seperti kertas putih resmi, siap dicetak.
+   ========================================================= */
+
+/* Font khas dari Google Fonts (butuh internet saat halaman dibuka) */
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+/* Variabel warna — ganti di sini, seluruh aplikasi ikut berubah */
+:root {
+  --aspal: #0d0f12;        /* background utama (jalan malam) */
+  --panel: #15181d;        /* kartu & panel */
+  --panel-2: #1c2027;      /* input & hover */
+  --garis: #272c35;        /* border halus */
+  --teks: #e9ebee;         /* teks utama */
+  --redup: #8b93a1;        /* teks sekunder */
+  --marka: #ffd60a;        /* KUNING marka jalan — aksen utama */
+  --marka-gelap: #e6bf00;
+  --hijau: #3ddc84;        /* status tersedia */
+  --merah: #ff5c5c;        /* denda / hapus */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(255, 214, 10, 0.06), transparent 60%),
+    var(--aspal);
+  color: var(--teks);
+  display: flex;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: 'Unbounded', sans-serif; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 250px;
+  background: #0a0c0f;
+  border-right: 2px dashed rgba(255, 214, 10, 0.35); /* garis tengah jalan */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  padding: 28px 18px;
+}
+
+.brand { margin-bottom: 30px; }
+
+/* Logo berbentuk plat nomor Indonesia */
+.plate {
+  display: inline-block;
+  background: #101113;
+  color: #fff;
+  border: 2px solid #f0f0f0;
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 0 2px #101113;
+}
+
+.brand h1 { font-size: 21px; font-weight: 900; letter-spacing: 1px; }
+.brand h1 span { color: var(--marka); }
+.tagline { font-size: 11px; color: var(--redup); margin-top: 5px; letter-spacing: 2px; }
+
+nav { display: flex; flex-direction: column; gap: 5px; }
+
+.nav-btn {
+  text-align: left;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--redup);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.nav-btn:hover { color: var(--teks); background: var(--panel-2); }
+
+.nav-btn.active {
+  color: var(--marka);
+  font-weight: 700;
+  border-left: 3px dashed var(--marka); /* marka jalan di menu aktif */
+  background: linear-gradient(90deg, rgba(255, 214, 10, 0.09), transparent);
+}
+
+.sidebar-foot { margin-top: auto; font-size: 12px; color: var(--redup); line-height: 1.8; }
+.sidebar-foot strong { color: var(--marka); display: block; font-size: 13px; }
+.foot-line { border-top: 2px dashed var(--garis); margin-bottom: 12px; }
+.foot-copy { display: block; font-size: 10px; margin-top: 6px; color: #555c66; }
+
+/* ===== KONTEN ===== */
+.content { margin-left: 250px; flex: 1; padding: 34px 40px; }
+
+.page { display: none; }
+.page.active { display: block; animation: masuk 0.25s ease; }
+
+@keyframes masuk {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header halaman dengan strip hazard kuning-hitam */
+.page-head { margin-bottom: 26px; }
+
+.hazard {
+  display: block;
+  width: 90px;
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--marka) 0 10px,
+    #111 10px 20px
+  );
+}
+
+.page-head h2 { font-size: 26px; font-weight: 700; }
+.page-head p  { color: var(--redup); margin-top: 6px; font-size: 14px; }
+
+/* ===== KARTU STATISTIK ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--garis);
+  border-top: 3px dashed rgba(255, 214, 10, 0.5);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-card.highlight {
+  background: linear-gradient(135deg, #1a1503, #15181d 70%);
+  border: 1px solid rgba(255, 214, 10, 0.4);
+}
+
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--redup); }
+.stat-value { font-family: 'Unbounded', sans-serif; font-size: 26px; font-weight: 700; color: var(--marka); }
+.stat-note  { font-size: 12px; color: var(--redup); }
+
+/* ===== PANEL ===== */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.panel h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 18px; color: var(--teks); }
+
+/* ===== FORM ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-wide { grid-column: 1 / -1; }
+.field-btn  { justify-content: flex-end; }
+
+label { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--redup); text-transform: uppercase; }
+
+input, select {
+  padding: 11px 13px;
+  border: 1px solid var(--garis);
+  border-radius: 9px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  background: var(--panel-2);
+  color: var(--teks);
+  color-scheme: dark; /* agar kalender date-picker ikut gelap */
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--marka);
+  outline-offset: 1px;
+  border-color: var(--marka);
+}
+
+.btn-primary {
+  background: var(--marka);
+  color: #111;
+  border: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 12px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary:hover { background: var(--marka-gelap); transform: translateY(-1px); }
+
+.btn-cetak {
+  background: transparent;
+  color: var(--marka);
+  border: 2px dashed var(--marka);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.btn-cetak:hover { background: rgba(255, 214, 10, 0.1); }
+
+.btn-hapus {
+  background: none;
+  border: 1px solid var(--merah);
+  color: var(--merah);
+  font-size: 12px;
+  padding: 5px 11px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.btn-hapus:hover { background: var(--merah); color: #fff; }
+
+/* Kotak estimasi biaya / info pengembalian */
+.estimasi {
+  background: rgba(255, 214, 10, 0.07);
+  border: 1px dashed rgba(255, 214, 10, 0.45);
+  border-radius: 9px;
+  padding: 13px 15px;
+  font-size: 14px;
+  color: var(--teks);
+}
+
+.estimasi strong { color: var(--marka); }
+
+/* ===== TABEL ===== */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--redup);
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--garis);
+}
+
+td { padding: 12px; border-bottom: 1px solid var(--garis); }
+
+tbody tr:hover { background: var(--panel-2); }
+
+.empty { text-align: center; color: var(--redup); padding: 26px !important; }
+
+/* Badge status */
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+.b-tersedia { background: rgba(61, 220, 132, 0.13); color: var(--hijau); }
+.b-disewa   { background: rgba(255, 214, 10, 0.13); color: var(--marka); }
+.b-selesai  { background: rgba(139, 147, 161, 0.15); color: var(--redup); }
+.b-denda    { background: rgba(255, 92, 92, 0.13); color: var(--merah); }
+
+/* =========================================================
+   KERTAS LAPORAN — tampil seperti dokumen resmi putih,
+   kontras dengan tema gelap di sekitarnya.
+   ========================================================= */
+.paper {
+  background: #fff;
+  color: #111;
+  border-radius: 6px;
+  padding: 44px 48px;
+  font-family: 'Times New Roman', Times, serif;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  max-width: 950px;
+}
+
+.kop { display: flex; align-items: center; gap: 22px; }
+
+.plate-paper {
+  border-color: #111;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #111;
+  margin-bottom: 0;
+}
+
+.kop-tengah h1 {
+  font-family: 'Times New Roman', serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+}
+
+.kop-tengah p { font-size: 13px; margin-top: 4px; }
+
+.kop-garis { border: none; border-top: 3px double #111; margin: 14px 0 22px; }
+
+.judul-laporan { font-family: 'Times New Roman', serif; font-size: 17px; text-align: center; text-decoration: underline; letter-spacing: 1px; }
+
+.periode-laporan { text-align: center; font-size: 13px; margin: 6px 0 20px; }
+
+.tabel-laporan { font-size: 12px; }
+.tabel-laporan th { color: #111; border: 1px solid #111; background: #f0f0f0; text-align: center; padding: 7px 6px; letter-spacing: 0; }
+.tabel-laporan td { border: 1px solid #111; padding: 7px 8px; }
+.tabel-laporan tbody tr:hover { background: #fafafa; }
+.tabel-laporan .empty { color: #777; }
+
+.ringkasan { margin-top: 18px; font-size: 13px; line-height: 1.9; }
+.ringkasan strong { display: inline-block; min-width: 190px; }
+
+.ttd { margin-top: 44px; margin-left: auto; width: 240px; text-align: center; font-size: 13px; }
+.ttd-ruang { height: 70px; }
+.ttd-nama { font-weight: bold; text-decoration: underline; }
+
+/* ===== ATURAN SAAT DICETAK (Ctrl+P / tombol Cetak) ===== */
+@media print {
+  body { background: #fff; }
+  .sidebar, .no-print { display: none !important; }
+  .content { margin-left: 0; padding: 0; }
+  .paper { box-shadow: none; border-radius: 0; max-width: 100%; padding: 10px; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 760px) {
+  .sidebar { position: static; width: 100%; height: auto; border-right: none; border-bottom: 2px dashed rgba(255, 214, 10, 0.35); }
+  body { flex-direction: column; }
+  .content { margin-left: 0; padding: 22px; }
+  nav { flex-direction: row; flex-wrap: wrap; }
+  .nav-btn.active { border-left: none; border-bottom: 3px dashed var(--marka); }
+  .paper { padding: 24px 18px; }
+}

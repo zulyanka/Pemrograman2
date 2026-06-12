@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Showroom Master — Sistem Penjualan Mobil</title>
+  <!-- Menghubungkan file CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR (menu kiri) ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-logo">SM</span>
+      <div>
+        <h1>Showroom Master</h1>
+        <p>Sistem Penjualan Mobil</p>
+      </div>
+    </div>
+
+    <nav>
+      <button class="nav-btn active" data-target="dashboard">⌂ Dashboard</button>
+      <button class="nav-btn" data-target="mobil">🚗 Data Mobil</button>
+      <button class="nav-btn" data-target="custo  mer">👤 Data Customer</button>
+      <button class="nav-btn" data-target="transaksi">🧾 Transaksi</button>
+    </nav>
+
+    <footer class="sidebar-foot">
+  <strong>Nama : Zulyan Widyaka K</strong><br />
+  NIM : 231011403446<br />
+  <span class="foot-copy">© 2026 Showroom Master</span>
+</footer>
+  </aside>
+
+  <!-- ===== KONTEN UTAMA ===== -->
+  <main class="content">
+
+    <!-- ========== HALAMAN DASHBOARD ========== -->
+    <section id="dashboard" class="page active">
+      <header class="page-head">
+        <h2>Dashboard</h2>
+        <p>Ringkasan data showroom Anda hari ini.</p>
+      </header>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total Mobil</span>
+          <span class="stat-value" id="statMobil">0</span>
+          <span class="stat-note">unit terdaftar</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total Customer</span>
+          <span class="stat-value" id="statCustomer">0</span>
+          <span class="stat-note">orang terdaftar</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total Transaksi</span>
+          <span class="stat-value" id="statTransaksi">0</span>
+          <span class="stat-note">penjualan tercatat</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-label">Total Pendapatan</span>
+          <span class="stat-value" id="statPendapatan">Rp 0</span>
+          <span class="stat-note">dari semua transaksi</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Transaksi Terbaru</h3>
+        <table>
+          <thead>
+            <tr><th>Tanggal</th><th>Customer</th><th>Mobil</th><th>Harga</th></tr>
+          </thead>
+          <tbody id="tabelDashboard">
+            <tr><td colspan="4" class="empty">Belum ada transaksi. Mulai dari menu Data Mobil → Data Customer → Transaksi.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== HALAMAN DATA MOBIL ========== -->
+    <section id="mobil" class="page">
+      <header class="page-head">
+        <h2>Data Mobil</h2>
+        <p>Tambahkan stok mobil yang dijual di showroom.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Input Mobil</h3>
+        <form id="formMobil" class="form-grid">
+          <div class="field">
+            <label for="merkMobil">Merk</label>
+            <input type="text" id="merkMobil" placeholder="Contoh: Toyota" required />
+          </div>
+          <div class="field">
+            <label for="modelMobil">Model / Tipe</label>
+            <input type="text" id="modelMobil" placeholder="Contoh: Avanza 1.5 G" required />
+          </div>
+          <div class="field">
+            <label for="tahunMobil">Tahun</label>
+            <input type="number" id="tahunMobil" min="1990" max="2030" placeholder="2024" required />
+          </div>
+          <div class="field">
+            <label for="warnaMobil">Warna</label>
+            <input type="text" id="warnaMobil" placeholder="Hitam" required />
+          </div>
+          <div class="field">
+            <label for="hargaMobil">Harga (Rp)</label>
+            <input type="number" id="hargaMobil" min="0" placeholder="250000000" required />
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">Simpan Mobil</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Daftar Mobil</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Merk</th><th>Model</th><th>Tahun</th><th>Warna</th><th>Harga</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelMobil"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== HALAMAN DATA CUSTOMER ========== -->
+    <section id="customer" class="page">
+      <header class="page-head">
+        <h2>Data Customer</h2>
+        <p>Daftarkan pembeli sebelum membuat transaksi.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Input Customer</h3>
+        <form id="formCustomer" class="form-grid">
+          <div class="field">
+            <label for="namaCustomer">Nama Lengkap</label>
+            <input type="text" id="namaCustomer" placeholder="Budi Santoso" required />
+          </div>
+          <div class="field">
+            <label for="hpCustomer">No. HP</label>
+            <input type="tel" id="hpCustomer" placeholder="0812xxxxxxx" required />
+          </div>
+          <div class="field">
+            <label for="emailCustomer">Email</label>
+            <input type="email" id="emailCustomer" placeholder="budi@email.com" />
+          </div>
+          <div class="field field-wide">
+            <label for="alamatCustomer">Alamat</label>
+            <input type="text" id="alamatCustomer" placeholder="Jl. Merdeka No. 1, Jakarta" required />
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">Simpan Customer</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Daftar Customer</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Nama</th><th>No. HP</th><th>Email</th><th>Alamat</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelCustomer"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== HALAMAN TRANSAKSI ========== -->
+    <section id="transaksi" class="page">
+      <header class="page-head">
+        <h2>Transaksi</h2>
+        <p>Catat penjualan: pilih mobil dan customer yang sudah terdaftar.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Transaksi Baru</h3>
+        <form id="formTransaksi" class="form-grid">
+          <div class="field">
+            <label for="pilihMobil">Mobil</label>
+            <select id="pilihMobil" required>
+              <option value="">-- Pilih mobil --</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pilihCustomer">Customer</label>
+            <select id="pilihCustomer" required>
+              <option value="">-- Pilih customer --</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tanggalTransaksi">Tanggal</label>
+            <input type="date" id="tanggalTransaksi" required />
+          </div>
+          <div class="field">
+            <label for="metodeBayar">Metode Pembayaran</label>
+            <select id="metodeBayar" required>
+              <option value="">-- Pilih metode --</option>
+              <option value="Tunai">Tunai</option>
+              <option value="Kredit">Kredit</option>
+              <option value="Transfer Bank">Transfer Bank</option>
+            </select>
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">Simpan Transaksi</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Riwayat Transaksi</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Tanggal</th><th>Customer</th><th>Mobil</th><th>Metode</th><th>Harga</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelTransaksi"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Menghubungkan file JavaScript (ditaruh paling bawah agar HTML dimuat dulu) -->
+  <script src="script.js"></script>
+</body>
+</html>

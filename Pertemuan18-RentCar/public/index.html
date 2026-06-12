@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZW Rent Car — Aplikasi Penyewaan Mobil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="plate">B 446 ZWK</div>
+      <h1>ZW <span>RENT CAR</span></h1>
+      <p class="tagline">— sewa cepat, jalan terus —</p>
+    </div>
+
+    <nav>
+      <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+      <button class="nav-btn" data-target="mobil">Data Mobil</button>
+      <button class="nav-btn" data-target="customer">Data Customer</button>
+      <button class="nav-btn" data-target="sewa">Penyewaan</button>
+      <button class="nav-btn" data-target="kembali">Pengembalian</button>
+      <button class="nav-btn" data-target="laporan">Laporan</button>
+    </nav>
+
+    <footer class="sidebar-foot">
+      <div class="foot-line"></div>
+      <strong>Zulyan Widyaka K</strong>
+      NIM : 231011403446
+      <span class="foot-copy">© 2026 ZW Rent Car</span>
+    </footer>
+  </aside>
+
+  <!-- ===== KONTEN ===== -->
+  <main class="content">
+
+    <!-- ========== DASHBOARD ========== -->
+    <section id="dashboard" class="page active">
+      <header class="page-head">
+        <span class="hazard"></span>
+        <h2>Dashboard</h2>
+        <p>Kondisi armada dan penyewaan hari ini.</p>
+      </header>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total Armada</span>
+          <span class="stat-value" id="statMobil">0</span>
+          <span class="stat-note">unit mobil</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Sedang Disewa</span>
+          <span class="stat-value" id="statDisewa">0</span>
+          <span class="stat-note">unit di jalan</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total Transaksi</span>
+          <span class="stat-value" id="statSewa">0</span>
+          <span class="stat-note">penyewaan tercatat</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-label">Total Pendapatan</span>
+          <span class="stat-value" id="statPendapatan">Rp 0</span>
+          <span class="stat-note">sewa + denda</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Sedang Disewa Saat Ini</h3>
+        <table>
+          <thead>
+            <tr><th>Tgl Sewa</th><th>Customer</th><th>Mobil</th><th>Harus Kembali</th></tr>
+          </thead>
+          <tbody id="tabelDashboard"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== DATA MOBIL ========== -->
+    <section id="mobil" class="page">
+      <header class="page-head">
+        <span class="hazard"></span>
+        <h2>Data Mobil</h2>
+        <p>Armada yang siap disewakan, lengkap dengan tarif per hari.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Input Mobil</h3>
+        <form id="formMobil" class="form-grid">
+          <div class="field">
+            <label for="merkMobil">Merk</label>
+            <input type="text" id="merkMobil" placeholder="Toyota" required />
+          </div>
+          <div class="field">
+            <label for="modelMobil">Model / Tipe</label>
+            <input type="text" id="modelMobil" placeholder="Avanza 1.5 G" required />
+          </div>
+          <div class="field">
+            <label for="tahunMobil">Tahun</label>
+            <input type="number" id="tahunMobil" min="1990" max="2030" placeholder="2024" required />
+          </div>
+          <div class="field">
+            <label for="platMobil">Plat Nomor</label>
+            <input type="text" id="platMobil" placeholder="B 1234 ABC" required />
+          </div>
+          <div class="field">
+            <label for="hargaMobil">Harga Sewa / Hari (Rp)</label>
+            <input type="number" id="hargaMobil" min="0" placeholder="350000" required />
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">+ Simpan Mobil</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Daftar Armada</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Merk</th><th>Model</th><th>Tahun</th><th>Plat</th><th>Tarif/Hari</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelMobil"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== DATA CUSTOMER ========== -->
+    <section id="customer" class="page">
+      <header class="page-head">
+        <span class="hazard"></span>
+        <h2>Data Customer</h2>
+        <p>Identitas penyewa wajib tercatat sebelum transaksi.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Input Customer</h3>
+        <form id="formCustomer" class="form-grid">
+          <div class="field">
+            <label for="namaCustomer">Nama Lengkap</label>
+            <input type="text" id="namaCustomer" placeholder="Budi Santoso" required />
+          </div>
+          <div class="field">
+            <label for="ktpCustomer">No. KTP</label>
+            <input type="text" id="ktpCustomer" placeholder="3171xxxxxxxxxxxx" required />
+          </div>
+          <div class="field">
+            <label for="hpCustomer">No. HP</label>
+            <input type="tel" id="hpCustomer" placeholder="0812xxxxxxx" required />
+          </div>
+          <div class="field field-wide">
+            <label for="alamatCustomer">Alamat</label>
+            <input type="text" id="alamatCustomer" placeholder="Jl. Merdeka No. 1, Jakarta" required />
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">+ Simpan Customer</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Daftar Customer</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Nama</th><th>No. KTP</th><th>No. HP</th><th>Alamat</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelCustomer"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== PENYEWAAN ========== -->
+    <section id="sewa" class="page">
+      <header class="page-head">
+        <span class="hazard"></span>
+        <h2>Penyewaan</h2>
+        <p>Pilih mobil yang tersedia, tentukan lama sewa — biaya dihitung otomatis.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Penyewaan Baru</h3>
+        <form id="formSewa" class="form-grid">
+          <div class="field">
+            <label for="pilihMobilSewa">Mobil (yang tersedia)</label>
+            <select id="pilihMobilSewa" required>
+              <option value="">-- Pilih mobil --</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pilihCustomerSewa">Customer</label>
+            <select id="pilihCustomerSewa" required>
+              <option value="">-- Pilih customer --</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tglSewa">Tanggal Sewa</label>
+            <input type="date" id="tglSewa" required />
+          </div>
+          <div class="field">
+            <label for="lamaHari">Lama Sewa (hari)</label>
+            <input type="number" id="lamaHari" min="1" placeholder="3" required />
+          </div>
+          <div class="field field-wide">
+            <div class="estimasi" id="estimasiBiaya">Estimasi biaya akan muncul di sini setelah mobil &amp; lama sewa dipilih.</div>
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">🔑 Proses Penyewaan</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Riwayat Penyewaan</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Tgl Sewa</th><th>Customer</th><th>Mobil</th><th>Lama</th><th>Harus Kembali</th><th>Biaya</th><th>Status</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="tabelSewa"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== PENGEMBALIAN ========== -->
+    <section id="kembali" class="page">
+      <header class="page-head">
+        <span class="hazard"></span>
+        <h2>Pengembalian</h2>
+        <p>Catat mobil yang kembali. Terlambat dari jadwal = kena denda per hari.</p>
+      </header>
+
+      <div class="panel">
+        <h3>Form Pengembalian Mobil</h3>
+        <form id="formKembali" class="form-grid">
+          <div class="field field-wide">
+            <label for="pilihSewaAktif">Transaksi yang Sedang Berjalan</label>
+            <select id="pilihSewaAktif" required>
+              <option value="">-- Pilih transaksi --</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tglKembali">Tanggal Pengembalian</label>
+            <input type="date" id="tglKembali" required />
+          </div>
+          <div class="field field-wide">
+            <div class="estimasi" id="infoKembali">Pilih transaksi untuk melihat jadwal kembalinya.</div>
+          </div>
+          <div class="field field-btn">
+            <button type="submit" class="btn-primary">↩ Proses Pengembalian</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Riwayat Pengembalian</h3>
+        <table>
+          <thead>
+            <tr><th>No</th><th>Customer</th><th>Mobil</th><th>Rencana Kembali</th><th>Kembali Aktual</th><th>Denda</th></tr>
+          </thead>
+          <tbody id="tabelKembali"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== LAPORAN ========== -->
+    <section id="laporan" class="page">
+      <header class="page-head no-print">
+        <span class="hazard"></span>
+        <h2>Laporan Transaksi</h2>
+        <p>Saring berdasarkan periode, lalu cetak — desainnya sudah siap print.</p>
+      </header>
+
+      <div class="panel no-print">
+        <h3>Filter Periode</h3>
+        <div class="form-grid">
+          <div class="field">
+            <label for="lapDari">Dari Tanggal</label>
+            <input type="date" id="lapDari" />
+          </div>
+          <div class="field">
+            <label for="lapSampai">Sampai Tanggal</label>
+            <input type="date" id="lapSampai" />
+          </div>
+          <div class="field field-btn">
+            <button class="btn-primary" onclick="terapkanLaporan()">Terapkan</button>
+          </div>
+          <div class="field field-btn">
+            <button class="btn-cetak" onclick="window.print()">🖨 Cetak Laporan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== KERTAS LAPORAN (yang ikut tercetak) ===== -->
+      <div class="paper" id="kertasLaporan">
+        <div class="kop">
+          <div class="kop-kiri">
+            <div class="plate plate-paper">B 446 ZWK</div>
+          </div>
+          <div class="kop-tengah">
+            <h1>ZW RENT CAR</h1>
+            <p>Jl. Raya Puspiptek No. 46, Tangerang Selatan · Telp. 0812-3456-7890</p>
+          </div>
+        </div>
+        <hr class="kop-garis" />
+
+        <h2 class="judul-laporan">LAPORAN TRANSAKSI PENYEWAAN MOBIL</h2>
+        <p class="periode-laporan" id="periodeLaporan">Periode: Semua Transaksi</p>
+
+        <table class="tabel-laporan">
+          <thead>
+            <tr>
+              <th>No</th><th>Tgl Sewa</th><th>Customer</th><th>Mobil</th>
+              <th>Lama</th><th>Rencana Kembali</th><th>Kembali Aktual</th>
+              <th>Status</th><th>Denda</th><th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="tabelLaporan"></tbody>
+        </table>
+
+        <div class="ringkasan" id="ringkasanLaporan"></div>
+
+        <div class="ttd">
+          <p id="tglCetak">Tangerang Selatan, ...</p>
+          <p>Penanggung Jawab,</p>
+          <div class="ttd-ruang"></div>
+          <p class="ttd-nama">Zulyan Widyaka K</p>
+          <p>NIM : 231011403446</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
